@@ -1,79 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <title>LetrasUBA_Bot - Edición</title>
-    <script src="https://unpkg.com/vue"></script>
-    <style>
-      body {
-        font-family: monospace;
-        color: #444;
-      }
-      .item {
-        cursor: pointer;
-      }
-      .bold {
-        font-weight: bold;
-      }
-      ul {
-        padding-left: 1em;
-        line-height: 1.5em;
-        list-style-type: dot;
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-        <a class="navbar-brand" href="#"
-          >LetrasUBA_Bot<span class="d-none d-md-inline"> - </span
-          ><br class="d-md-none" />Editor de menú</a
-        >
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#"
-                >Acerca del editor</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Cómo utilizar el editor</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contacto</a>
-            </li>
-          </ul>
-        </div>
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <title>LetrasUBA_Bot - Edición</title>
+  <script src="https://unpkg.com/vue"></script>
+  <style>
+    body {
+      font-family: monospace;
+      color: #444;
+    }
+
+    .item {
+      cursor: pointer;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    ul {
+      padding-left: 1em;
+      line-height: 1.5em;
+      list-style-type: dot;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">LetrasUBA_Bot<span class="d-none d-md-inline"> - </span><br
+          class="d-md-none" />Editor de menú</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">Acerca del editor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cómo utilizar el editor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contacto</a>
+          </li>
+        </ul>
       </div>
-    </nav>
-    <div class="container px-5">
-      <script type="text/x-template" id="item-template">
+    </div>
+  </nav>
+  <div class="container px-5">
+    <script type="text/x-template" id="item-template">
         <li>
           <div :class="{bold: isFolder}">
             <input placeholder="Escriba el nombre de este menu" type="text" v-bind:value="item.name">
             <span @click="toggle" @dblclick="makeFolder" v-model="item">[{{ isOpen ? '-' : '+' }}]</span>
             <br>
-            <textarea v-if="isFolder" placeholder="Escriba el texto de la respuesta">{{ item.response_text }}</textarea>
+            <textarea placeholder="Escriba el texto de la respuesta">{{ item.response_text }}</textarea>
           </div>
           <ul v-show="isOpen" v-if="isFolder">
             <tree-item
@@ -88,248 +78,227 @@
           </ul>
         </li>
       </script>
-      <p>(You can double click on an item to turn it into a folder.)</p>
+    <p>(You can double click on an item to turn it into a folder.)</p>
 
-      <!-- the demo root element -->
-      <ul id="demo">
-        <tree-item
-          class="item"
-          :item="treeData"
-          @make-folder="makeFolder"
-          @add-item="addItem"
-        ></tree-item>
-      </ul>
+    <!-- the demo root element -->
+    <ul id="demo">
+      <tree-item class="item" :item="treeData" @make-folder="makeFolder" @add-item="addItem"></tree-item>
+    </ul>
 
-      <script>
-        // demo data
-        var treeData = {  "name": "start",  "response_text": "¡Hola! Soy LetrasUBA_bot, el bot del Departamento de Letras de la UBA. ¿En qué puedo ayudarte? \nIngresá uno de las siguientes opciones:",  "children": [    {      "name": "Inscripciones",      "response_text": "Ingresá una de las siguientes opciones para seguir:",      "children": [        {          "name": "Fechas de inscripción ",
-          "response_text": "¿Tenés para anotar? Acá te paso las fechas de inscripción ⏰ para cada cuatrimestre:\n- Primer cuatrimestre entre el 15 y el 19 de marzo de 2021. \n- Segundo cuatrimestre entre el 2 al 6 de agosto de 2021.\n- Seminarios de verano entre el 20 al 22 de diciembre de 2021.\nPara conocer el calendario académico completo hacé click  👉  <a href=\"http://academica.filo.uba.ar/calendario-acad%C3%A9mico/\">acá</a>.",
-          "children": []
+    <script>
+      // demo data
+      var treeData = {
+        "name": "start",
+        "response_text": "¡Hola! Soy LetrasUBA_bot, el bot del Departamento de Letras de la UBA. ¿En qué puedo ayudarte? \nIngresá uno de las siguientes opciones:",
+        "children": [
+          {
+            "name": "Inscripciones",
+            "response_text": "Ingresá una de las siguientes opciones para seguir:",
+            "children": [
+              {
+                "name": "Fechas de inscripción ",
+                "response_text": "¿Tenés para anotar? Acá te paso las fechas de inscripción ⏰ para cada cuatrimestre:\n- Primer cuatrimestre entre el 15 y el 19 de marzo de 2021. \n- Segundo cuatrimestre entre el 2 al 6 de agosto de 2021.\n- Seminarios de verano entre el 20 al 22 de diciembre de 2021.\nPara conocer el calendario académico completo hacé click  👉  <a href=\"http://academica.filo.uba.ar/calendario-acad%C3%A9mico/\">acá</a>."
+              },
+              {
+                "name": "Fechas de inscripción a las mesas de examen",
+                "response_text": "¿Tenés para anotar? Acá te paso las las fechas de inscripción ⏰ para cada turno.\n- Turno marzo entre el 8 y el 14 de febrero de 2021. \n- Turno mayo entre el 28 y el 30 de abril de 2021. \n- Turno julio entre el 21 y el 25 de junio de 2021. \n- Turno septiembre entre el 6 al 8 de septiembre de 2021.\n- Turno diciembre entre 8 al 12 de noviembre de 2021.\nPara conocer el calendario académico completo hacé click  👉  <a href=\"http://academica.filo.uba.ar/calendario-acad%C3%A9mico/\">acá</a>."
+              },
+              {
+                "name": "Calendario académico vigente",
+                "response_text": "Hacé click 👉   <a href=\"http://academica.filo.uba.ar/calendario-acad%C3%A9mico/\">acá</a> para encontrar todas las fechas del calendario académico 2021."
+              }
+            ]
+          },
+          {
+            "name": "Horarios",
+            "response_text": "Para conocer los horarios de una materia o seminario del segundo cuatrimestre de 2021, hacé click 👉  <a href=\"http://letras.filo.uba.ar/sites/letras.filo.uba.ar/files/documentos/PLANILLA%20HORARIOS%20PARA%20ESTUDIANTES%202C%202021%20%285-07-21%29.pdf\">acá</a>."
+          },
+          {
+            "name": "Campus virtual",
+            "response_text": "El campus virtual... Sé que a veces puede ser un poco complicado al principio. Puedo ayudarte si ingresás alguna de las siguientes opciones:",
+            "children": [
+              {
+                "name": "Funcionamiento del campus",
+                "response_text": "Si sos ingresante, seguramente tengas que crearte una cuenta. ¡No te preocupes!  En este video podés ver los pasos para hacerlo. \n\nSi tenés otras dudas sobre el funcionamiento del campus, existe un espacio para resolverlas. Hacé click 👉  <a href=\"https://campus.filo.uba.ar/course/view.php?id=1450\">acá</a>."
+              },
+              {
+                "name": "Matriculación a una materia",
+                "response_text": "La matriculación en el campus no es automática. Para poder matricularte en el campus en las materias o cursos de idiomas necesitarás lo que se llama una \"clave de matriculación\". Desde el Departamento de Letras les pedimos a todas las cátedras que este año usen la clave \"letras2021\". Si no te toma esta clave, lo más probable es que la materia en cuestión esté en proceso de diseñar su campus, por lo que conviene esperar hasta la semana próxima.\nRespecto de los cursos de idioma, que dependen del Departamento de Lenguas Modernas, las claves serán enviadas por mail a lxs estudiantes inscritxs. Por último, respecto de las materias del Dpto. de Letras Clásicas \\(Latín y Griego\\), las claves estarán subidas en la página de dicho Departamento.\nLa clave de Didáctica general este año es: LxsArtesanxs\nAl estar matriculado en el campus, ya la cátedra podrá comunicarse con vos por esa vía. Cada cátedra informará la modalidad en la que se realizará la inscripción a comisiones de prácticos.\n"
+              }
+            ]
+          },
+          {
+            "name": "Adscripciones",
+            "response_text": "¿Querés dar tu primer paso en la investigación? ¡Quiero ayudarte! Ingresá una de las opciones para seguir:",
+            "children": [
+              {
+                "name": "Convocatorias",
+                "response_text": "Hacé click  👉 <a href=\"http://letras.filo.uba.ar/content/convocatoria-adscripciones\"> acá </a> para conocer las convocatorias."
+              },
+              {
+                "name": "Requisitos para postularme",
+                "response_text": "Hacé click en 👉 <a href= \"http://letras.filo.uba.ar/content/resoluci%C3%B3n-sobre-adscripciones\"> este enlace</a> para saber cómo postularte. "
+              },
+              {
+                "name": "Quiero postularme a una adscripción",
+                "response_text": "Hacé click en 👉  <a href=\"http://letras.filo.uba.ar/FAQ_adscripciones/\">este enlace</a> para leer el reglamento de adscripciones."
+              }
+            ]
+          },
+          {
+            "name": "Correlatividad de materias",
+            "response_text": "¿Quién no ha tenido esta duda alguna vez? Ingresá uno de las siguientes opciones para poder ayudarte:",
+            "children": [
+              {
+                "name": "¿Qué correlatividades hay en la carrera de Letras?",
+                "response_text": "Para conocer sobre las correlatividades de la carrera, hacé click  <a href=\"http://letras.filo.uba.ar/plan-de-estudios-versi%C3%B3n-antigua#corre1\">acá</a>."
+              },
+              {
+                "name": "¿Gramática es correlativa de Lingüística?",
+                "response_text": "Para rendir Lingüística, es necesario haber cursado Gramática."
+              },
+              {
+                "name": "¿Teoría y Análisis Literario es correlativa del resto de las materias? ",
+                "response_text": "Para rendir alguna Literatura, es necesario haber cursado Teoría y Análisis Literario."
+              }
+            ]
+          },
+          {
+            "name": "Promedio histórico",
+            "response_text": "Ingresá una de las siguientes opciones para seguir:",
+            "children": [
+              {
+                "name": "Quiero conocer el promedio histórico de Letras.",
+                "response_text": "El promedio histórico de la carrera de Letras es 8,07.\n\n"
+              },
+              {
+                "name": "Quiero tramitar un certificado de promedio histórico. ",
+                "response_text": "Para tramitar un certificado de promedio histórico, hacé click acá."
+              },
+              {
+                "name": "Tengo dudas sobre el promedio histórico.",
+                "response_text": "¿Tenés dudas sobre el promedio histórico?",
+                "children": [
+                  {
+                    "name": "¿Para qué me sirve saber el promedio histórico?",
+                    "response_text": "Esta información puede ser solicitada en concursos, convocatorias a becas, entre otros."
+                  },
+                  {
+                    "name": "¿Hay diferencia entre el del profesorado y la licenciatura?",
+                    "response_text": "No, es el mismo."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Trámites",
+            "response_text": "¡No desesperes! Puedo ayudarte con estos trámites.  Ingresá una opción del menú para seguir. ",
+            "children": [
+              {
+                "name": "Certificado de alumno regular",
+                "response_text": "Los certificados de alumno regular se tramitan a través de <a href=\"http://suiga.filo.uba.ar/inicial.php\">SUIGA</a>.  Hacé click 👉  <a href= \"http://academica.filo.uba.ar/certificado-de-alumno-regular\">acá</a> para saber los pasos a seguir."
+              },
+              {
+                "name": "Certificado de examen",
+                "response_text": "Para solicitar un certificado de examen \\(parcial o final\\) tenés que escribir a la Dirección de Profesores \n👉   <a href= \"mailto:direcciondeprofesores@filo.uba.ar\">direcciondeprofesores@filo.uba.ar</a> con los siguientes datos: \n\n- Apellido y Nombre Completo, \n- Nº de DNI \n- Carrera \n- Materia por la cual solicita el certificado \n- Fecha en que tuvo lugar el examen parcial/final.\n\nHacé click para saber los pasos a seguir si rendiste un 👉  <a href=\"http://academica.filo.uba.ar/certificado-de-examen-parcial\">parcial</a>  o si rendiste un 👉  <a href=\"http://academica.filo.uba.ar/certificado-de-examen-final\">final</a>.  \n\n"
+              },
+              {
+                "name": "Equivalencia y/o reconocimiento de asignaturas de otra carrera",
+                "response_text": "Hacé click <a href= \"http://academica.filo.uba.ar/equivalencia-yo-reconocimiento-de-asignaturas\">acá</a>. para saber cómo hacer tu trámite de equivalencia y/o reconocimiento de asignaturas de otra carrera. "
+              },
+              {
+                "name": "Otros trámites",
+                "response_text": "Si querés consultar por otros trámites, hacé click <a href=\"http://academica.filo.uba.ar/tramites-distancia-estudiantes\">acá</a> para ver la lista completa. "
+              }
+            ]
+          },
+          {
+            "name": "WikiLetras",
+            "response_text": "WikiLetras es una herramienta de consulta para estudiantes, graduados e investigadores. En el año 2019, WikiLetras surge a partir de la iniciativa del Departamento de Letras de la Universidad de Buenos Aires con el objetivo de reunir información actualizada y relevante para la tarea académica en el marco del proyecto departamental \"Archivo de publicaciones y proyectos de investigación en curso\". Actualmente, esta herramienta ofrece información sobre proyectos de investigación y extensión iniciados a partir de 2014 en la Argentina, proyectos departamentales e institutos de investigación de la Universidad de Buenos Aires y revistas y publicaciones especializadas vigentes de este país, Brasil, Chile y España.\n\nEntrá 👉  <a href=\"http://wikiletras.com.ar/\">WikiLetras</a>"
+          },
+          {
+            "name": "Recibir novedades",
+            "response_text": "Opciones para recibir novedades",
+            "children": [
+              {
+                "name": "Quiero unirme al canal de Telegram.",
+                "response_text": "Hacé click <a href=\"https://t.me/NovedadesLetras\">acá </a>para unirte a nuestro canal y recibir las últimas novedades. "
+              },
+              {
+                "name": "Quiero subscribirme a la lista de email.",
+                "response_text": "Si querés sumarte a las listas de correo del Departamento, solicitalo a <a href=\"mailto:letrasuba@gmail.com\">letrasuba@gmail.com</a>.\n"
+              }
+            ]
+          },
+          {
+            "name": "Otros temas",
+            "response_text": "Si no pudiste resolver tu consulta, escribí a <a href=\"mailto:letrasuba@gmail.com\">letrasuba@gmail.com</a>."
+          }
+        ]
+      };
+
+      // define the tree-item component
+      Vue.component("tree-item", {
+        template: "#item-template",
+        props: {
+          item: Object,
         },
-        {
-          "name": "Fechas de inscripción a las mesas de examen",
-          "response_text": "¿Tenés para anotar? Acá te paso las las fechas de inscripción ⏰ para cada turno.\n- Turno marzo entre el 8 y el 14 de febrero de 2021. \n- Turno mayo entre el 28 y el 30 de abril de 2021. \n- Turno julio entre el 21 y el 25 de junio de 2021. \n- Turno septiembre entre el 6 al 8 de septiembre de 2021.\n- Turno diciembre entre 8 al 12 de noviembre de 2021.\nPara conocer el calendario académico completo hacé click  👉  <a href=\"http://academica.filo.uba.ar/calendario-acad%C3%A9mico/\">acá</a>.",
-          "children": []
+        data: function () {
+          return {
+            isOpen: false,
+          };
         },
-        {
-          "name": "Calendario académico vigente",
-          "response_text": "Hacé click 👉   <a href=\"http://academica.filo.uba.ar/calendario-acad%C3%A9mico/\">acá</a> para encontrar todas las fechas del calendario académico 2021.",
-          "children": []
-        }
-      ]
-    },
-    {
-      "name": "Horarios",
-      "response_text": "Para conocer los horarios de una materia o seminario del segundo cuatrimestre de 2021, hacé click 👉  <a href=\"http://letras.filo.uba.ar/sites/letras.filo.uba.ar/files/documentos/PLANILLA%20HORARIOS%20PARA%20ESTUDIANTES%202C%202021%20%285-07-21%29.pdf\">acá</a>.",
-      "children": []
-    },
-    {
-      "name": "Campus virtual",
-      "response_text": "El campus virtual... Sé que a veces puede ser un poco complicado al principio. Puedo ayudarte si ingresás alguna de las siguientes opciones:",
-      "children": [
-        {
-          "name": "Funcionamiento del campus",
-          "response_text": "Si sos ingresante, seguramente tengas que crearte una cuenta. ¡No te preocupes!  En este video podés ver los pasos para hacerlo. \n\nSi tenés otras dudas sobre el funcionamiento del campus, existe un espacio para resolverlas. Hacé click 👉  <a href=\"https://campus.filo.uba.ar/course/view.php?id=1450\">acá</a>.",
-          "children": []
+        computed: {
+          isFolder: function () {
+            return this.item.children && this.item.children.length;
+          },
         },
-        {
-          "name": "Matriculación a una materia",
-          "response_text": "La matriculación en el campus no es automática. Para poder matricularte en el campus en las materias o cursos de idiomas necesitarás lo que se llama una \"clave de matriculación\". Desde el Departamento de Letras les pedimos a todas las cátedras que este año usen la clave \"letras2021\". Si no te toma esta clave, lo más probable es que la materia en cuestión esté en proceso de diseñar su campus, por lo que conviene esperar hasta la semana próxima.\nRespecto de los cursos de idioma, que dependen del Departamento de Lenguas Modernas, las claves serán enviadas por mail a lxs estudiantes inscritxs. Por último, respecto de las materias del Dpto. de Letras Clásicas \\(Latín y Griego\\), las claves estarán subidas en la página de dicho Departamento.\nLa clave de Didáctica general este año es: LxsArtesanxs\nAl estar matriculado en el campus, ya la cátedra podrá comunicarse con vos por esa vía. Cada cátedra informará la modalidad en la que se realizará la inscripción a comisiones de prácticos.\n",
-          "children": []
-        }
-      ]
-    },
-    {
-      "name": "Adscripciones",
-      "response_text": "¿Querés dar tu primer paso en la investigación? ¡Quiero ayudarte! Ingresá una de las opciones para seguir:",
-      "children": [
-        {
-          "name": "Convocatorias",
-          "response_text": "Hacé click  👉 <a href=\"http://letras.filo.uba.ar/content/convocatoria-adscripciones\"> acá </a> para conocer las convocatorias.",
-          "children": []
-        },
-        {
-          "name": "Requisitos para postularme",
-          "response_text": "Hacé click en 👉 <a href= \"http://letras.filo.uba.ar/content/resoluci%C3%B3n-sobre-adscripciones\"> este enlace</a> para saber cómo postularte. ",
-          "children": []
-        },
-        {
-          "name": "Quiero postularme a una adscripción",
-          "response_text": "Hacé click en 👉  <a href=\"http://letras.filo.uba.ar/FAQ_adscripciones/\">este enlace</a> para leer el reglamento de adscripciones.",
-          "children": []
-        }
-      ]
-    },
-    {
-      "name": "Correlatividad de materias",
-      "response_text": "¿Quién no ha tenido esta duda alguna vez? Ingresá uno de las siguientes opciones para poder ayudarte:",
-      "children": [
-        {
-          "name": "¿Qué correlatividades hay en la carrera de Letras?",
-          "response_text": "Para conocer sobre las correlatividades de la carrera, hacé click  <a href=\"http://letras.filo.uba.ar/plan-de-estudios-versi%C3%B3n-antigua#corre1\">acá</a>.",
-          "children": []
-        },
-        {
-          "name": "¿Gramática es correlativa de Lingüística?",
-          "response_text": "Para rendir Lingüística, es necesario haber cursado Gramática.",
-          "children": []
-        },
-        {
-          "name": "¿Teoría y Análisis Literario es correlativa del resto de las materias? ",
-          "response_text": "Para rendir alguna Literatura, es necesario haber cursado Teoría y Análisis Literario.",
-          "children": []
-        }
-      ]
-    },
-    {
-      "name": "Promedio histórico",
-      "response_text": "Ingresá una de las siguientes opciones para seguir:",
-      "children": [
-        {
-          "name": "Quiero conocer el promedio histórico de Letras.",
-          "response_text": "El promedio histórico de la carrera de Letras es 8,07.\n\n",
-          "children": []
-        },
-        {
-          "name": "Quiero tramitar un certificado de promedio histórico. ",
-          "response_text": "Para tramitar un certificado de promedio histórico, hacé click acá.",
-          "children": []
-        },
-        {
-          "name": "Tengo dudas sobre el promedio histórico.",
-          "response_text": "¿Tenés dudas sobre el promedio histórico?",
-          "children": [
-            {
-              "name": "¿Para qué me sirve saber el promedio histórico?",
-              "response_text": "Esta información puede ser solicitada en concursos, convocatorias a becas, entre otros.",
-              "children": []
-            },
-            {
-              "name": "¿Hay diferencia entre el del profesorado y la licenciatura?",
-              "response_text": "No, es el mismo.",
-              "children": []
+        methods: {
+          toggle: function () {
+            if (this.isFolder) {
+              this.isOpen = !this.isOpen;
             }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Trámites",
-      "response_text": "¡No desesperes! Puedo ayudarte con estos trámites.  Ingresá una opción del menú para seguir. ",
-      "children": [
-        {
-          "name": "Certificado de alumno regular",
-          "response_text": "Los certificados de alumno regular se tramitan a través de <a href=\"http://suiga.filo.uba.ar/inicial.php\">SUIGA</a>.  Hacé click 👉  <a href= \"http://academica.filo.uba.ar/certificado-de-alumno-regular\">acá</a> para saber los pasos a seguir.",
-          "children": []
+          },
+          makeFolder: function () {
+            if (!this.isFolder) {
+              this.$emit("make-folder", this.item);
+              this.isOpen = true;
+            }
+          },
         },
-        {
-          "name": "Certificado de examen",
-          "response_text": "Para solicitar un certificado de examen \\(parcial o final\\) tenés que escribir a la Dirección de Profesores \n👉   <a href= \"mailto:direcciondeprofesores@filo.uba.ar\">direcciondeprofesores@filo.uba.ar</a> con los siguientes datos: \n\n- Apellido y Nombre Completo, \n- Nº de DNI \n- Carrera \n- Materia por la cual solicita el certificado \n- Fecha en que tuvo lugar el examen parcial/final.\n\nHacé click para saber los pasos a seguir si rendiste un 👉  <a href=\"http://academica.filo.uba.ar/certificado-de-examen-parcial\">parcial</a>  o si rendiste un 👉  <a href=\"http://academica.filo.uba.ar/certificado-de-examen-final\">final</a>.  \n\n",
-          "children": []
+      });
+
+      // boot up the demo
+      var demo = new Vue({
+        el: "#demo",
+        data: {
+          treeData: treeData,
         },
-        {
-          "name": "Equivalencia y/o reconocimiento de asignaturas de otra carrera",
-          "response_text": "Hacé click <a href= \"http://academica.filo.uba.ar/equivalencia-yo-reconocimiento-de-asignaturas\">acá</a>. para saber cómo hacer tu trámite de equivalencia y/o reconocimiento de asignaturas de otra carrera. ",
-          "children": []
+        methods: {
+          makeFolder: function (item) {
+            Vue.set(item, "children", []);
+            this.addItem(item);
+          },
+          addItem: function (item) {
+            item.children.push({
+              name: "",
+              text: "",
+            });
+          },
         },
-        {
-          "name": "Otros trámites",
-          "response_text": "Si querés consultar por otros trámites, hacé click <a href=\"http://academica.filo.uba.ar/tramites-distancia-estudiantes\">acá</a> para ver la lista completa. ",
-          "children": []
-        }
-      ]
-    },
-    {
-      "name": "WikiLetras",
-      "response_text": "WikiLetras es una herramienta de consulta para estudiantes, graduados e investigadores. En el año 2019, WikiLetras surge a partir de la iniciativa del Departamento de Letras de la Universidad de Buenos Aires con el objetivo de reunir información actualizada y relevante para la tarea académica en el marco del proyecto departamental \"Archivo de publicaciones y proyectos de investigación en curso\". Actualmente, esta herramienta ofrece información sobre proyectos de investigación y extensión iniciados a partir de 2014 en la Argentina, proyectos departamentales e institutos de investigación de la Universidad de Buenos Aires y revistas y publicaciones especializadas vigentes de este país, Brasil, Chile y España.\n\nEntrá 👉  <a href=\"http://wikiletras.com.ar/\">WikiLetras</a>",
-      "children": []
-    },
-    {
-      "name": "Recibir novedades",
-      "response_text": "Opciones para recibir novedades",
-      "children": [
-        {
-          "name": "Quiero unirme al canal de Telegram.",
-          "response_text": "Hacé click <a href=\"https://t.me/NovedadesLetras\">acá </a>para unirte a nuestro canal y recibir las últimas novedades. ",
-          "children": []
-        },
-        {
-          "name": "Quiero subscribirme a la lista de email.",
-          "response_text": "Si querés sumarte a las listas de correo del Departamento, solicitalo a <a href=\"mailto:letrasuba@gmail.com\">letrasuba@gmail.com</a>.\n",
-          "children": []
-        }
-      ]
-    },
-    {
-      "name": "Otros temas",
-      "response_text": "Si no pudiste resolver tu consulta, escribí a <a href=\"mailto:letrasuba@gmail.com\">letrasuba@gmail.com</a>.",
-      "children": []
-    }
-  ]
-};
+      });
+    </script>
+  </div>
 
-        // define the tree-item component
-        Vue.component("tree-item", {
-          template: "#item-template",
-          props: {
-            item: Object,
-          },
-          data: function () {
-            return {
-              isOpen: false,
-            };
-          },
-          computed: {
-            isFolder: function () {
-              return this.item.children && this.item.children.length;
-            },
-          },
-          methods: {
-            toggle: function () {
-              if (this.isFolder) {
-                this.isOpen = !this.isOpen;
-              }
-            },
-            makeFolder: function () {
-              if (!this.isFolder) {
-                this.$emit("make-folder", this.item);
-                this.isOpen = true;
-              }
-            },
-          },
-        });
+  <div id="app"></div>
 
-        // boot up the demo
-        var demo = new Vue({
-          el: "#demo",
-          data: {
-            treeData: treeData,
-          },
-          methods: {
-            makeFolder: function (item) {
-              Vue.set(item, "children", []);
-              this.addItem(item);
-            },
-            addItem: function (item) {
-              item.children.push({
-                name: "",
-                text: "",
-              });
-            },
-          },
-        });
-      </script>
-    </div>
+  <!-- App js -->
+  <script type="module" src="/src/main.js"></script>
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</body>
 
-    <div id="app"></div>
-
-    <!-- App js -->
-    <script type="module" src="/src/main.js"></script>
-    <!-- Bootstrap Bundle with Popper -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-  </body>
 </html>
