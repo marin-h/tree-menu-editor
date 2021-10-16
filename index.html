@@ -70,7 +70,7 @@
       <script type="text/x-template" id="item-template">
         <li>
           <div :class="{bold: isFolder}">
-            <input placeholder="Escriba el texto del título" type="text" v-bind:value="item.name">
+            <input placeholder="Escriba el nombre de este menu" type="text" v-bind:value="item.name">
             <span @click="toggle" @dblclick="makeFolder" v-model="item">[{{ isOpen ? '-' : '+' }}]</span>
             <br>
             <textarea v-if="isFolder" placeholder="Escriba el texto de la respuesta">{{ text }}</textarea>
@@ -103,7 +103,7 @@
       <script>
         // demo data
         var treeData = {
-          name: "Menu principal",
+          name: "menu_principal",
           children: [
             { name: "hello" },
             { name: "wat" },
