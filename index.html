@@ -1,11 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
     <title>LetrasUBA_Bot - Edición</title>
     <script src="https://unpkg.com/vue"></script>
     <style>
@@ -24,20 +29,32 @@
         line-height: 1.5em;
         list-style-type: dot;
       }
-
     </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="#">LetrasUBA_Bot<span class="d-none d-md-inline"> - </span><br class="d-md-none"/>Editor de menú</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="#"
+          >LetrasUBA_Bot<span class="d-none d-md-inline"> - </span
+          ><br class="d-md-none" />Editor de menú</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Acerca del editor</a>
+              <a class="nav-link" aria-current="page" href="#"
+                >Acerca del editor</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Cómo utilizar el editor</a>
@@ -52,12 +69,11 @@
     <div class="container px-5">
       <script type="text/x-template" id="item-template">
         <li>
-          <div
-            :class="{bold: isFolder}"
-            @click="toggle"
-            @dblclick="makeFolder">
-            {{ item.name }}
-            <span v-if="isFolder">[{{ isOpen ? '-' : '+' }}]</span>
+          <div :class="{bold: isFolder}">
+            <input placeholder="Escriba el texto del título" type="text" v-bind:value="item.name">
+            <span @click="toggle" @dblclick="makeFolder" v-model="item">[{{ isOpen ? '-' : '+' }}]</span>
+            <br>
+            <textarea v-if="isFolder" placeholder="Escriba el texto de la respuesta">{{ text }}</textarea>
           </div>
           <ul v-show="isOpen" v-if="isFolder">
             <tree-item
@@ -73,7 +89,7 @@
         </li>
       </script>
       <p>(You can double click on an item to turn it into a folder.)</p>
-  
+
       <!-- the demo root element -->
       <ul id="demo">
         <tree-item
@@ -83,11 +99,11 @@
           @add-item="addItem"
         ></tree-item>
       </ul>
-  
+
       <script>
         // demo data
         var treeData = {
-          name: "My Tree",
+          name: "Menu principal",
           children: [
             { name: "hello" },
             { name: "wat" },
@@ -96,78 +112,81 @@
               children: [
                 {
                   name: "child folder",
-                  children: [{ name: "hello" }, { name: "wat" }]
+                  children: [{ name: "hello" }, { name: "wat" }],
                 },
                 { name: "hello" },
                 { name: "wat" },
                 {
                   name: "child folder",
-                  children: [{ name: "hello" }, { name: "wat" }]
-                }
-              ]
-            }
-          ]
+                  children: [{ name: "hello" }, { name: "wat" }],
+                },
+              ],
+            },
+          ],
         };
-  
+
         // define the tree-item component
         Vue.component("tree-item", {
           template: "#item-template",
           props: {
-            item: Object
+            item: Object,
           },
-          data: function() {
+          data: function () {
             return {
-              isOpen: false
+              isOpen: false,
             };
           },
           computed: {
-            isFolder: function() {
+            isFolder: function () {
               return this.item.children && this.item.children.length;
-            }
+            },
           },
           methods: {
-            toggle: function() {
+            toggle: function () {
               if (this.isFolder) {
                 this.isOpen = !this.isOpen;
               }
             },
-            makeFolder: function() {
+            makeFolder: function () {
               if (!this.isFolder) {
                 this.$emit("make-folder", this.item);
                 this.isOpen = true;
               }
-            }
-          }
+            },
+          },
         });
-  
+
         // boot up the demo
         var demo = new Vue({
           el: "#demo",
           data: {
-            treeData: treeData
+            treeData: treeData,
           },
           methods: {
-            makeFolder: function(item) {
+            makeFolder: function (item) {
               Vue.set(item, "children", []);
               this.addItem(item);
             },
-            addItem: function(item) {
+            addItem: function (item) {
               item.children.push({
-                name: "new stuff"
+                name: "",
+                text: "",
               });
-            }
-          }
+            },
+          },
         });
       </script>
     </div>
-    
-
 
     <div id="app"></div>
-    
-    <!-- App js -->    
+
+    <!-- App js -->
     <script type="module" src="/src/main.js"></script>
     <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
