@@ -8,28 +8,10 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <!-- index.css -->
+  <link rel="stylesheet" href="index.css">
   <title>LetrasUBA_Bot - Edición</title>
   <script src="https://unpkg.com/vue"></script>
-  <style>
-    body {
-      font-family: monospace;
-      color: #444;
-    }
-
-    .item {
-      cursor: pointer;
-    }
-
-    .bold {
-      font-weight: bold;
-    }
-
-    ul {
-      padding-left: 1em;
-      line-height: 1.5em;
-      list-style-type: dot;
-    }
-  </style>
 </head>
 
 <body>
@@ -56,6 +38,7 @@
       </div>
     </div>
   </nav>
+
   <div class="container px-5">
     <script type="text/x-template" id="item-template">
         <li>
@@ -82,7 +65,9 @@
 
     <!-- the demo root element -->
     <ul id="demo">
-      <tree-item class="item" :item="treeData" @make-folder="makeFolder" @add-item="addItem"></tree-item>
+      <tree-item class="item" :item="treeData" @make-folder="makeFolder" @add-item="addItem">
+
+      </tree-item>
     </ul>
 
     <script>
@@ -291,8 +276,11 @@
     </script>
   </div>
 
-  <div id="app"></div>
 
+  <div id="app"></div>
+    <iframe>
+      <video src="https://www.youtube.com/embed/0aSWZQdQEec?playlist=0aSWZQdQEec&amp;iv_load_policy=3&amp;enablejsapi=1&amp;disablekb=1&amp;autoplay=1&amp;controls=0&amp;showinfo=0&amp;rel=0&amp;loop=1&amp;wmode=transparent&amp;origin=https%3A%2F%2Fdobleuv.com&amp;widgetid=1"></video>
+    </iframe>
   <!-- App js -->
   <script type="module" src="/src/main.js"></script>
   <!-- Bootstrap Bundle with Popper -->
