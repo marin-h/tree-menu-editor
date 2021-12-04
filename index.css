@@ -1,0 +1,23 @@
+body {
+  font-family: monospace;
+  color: #444;
+}
+
+a:hover {
+  color: #000000;
+  font-weight: bold;
+}
+
+.item {
+  cursor: pointer;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+ul {
+  padding-left: 1em;
+  line-height: 1.5em;
+  list-style-type: dot;
+}
