@@ -18,14 +18,14 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
       <a class="navbar-brand" href="#">LetrasUBA_Bot<span class="d-none d-md-inline"> - </span><br
-          class="d-md-none" />Editor de menú</a>
+          class="d-md-none" />Editor de configuración</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
+          <!--li class="nav-item">
             <a class="nav-link" aria-current="page" href="#">Acerca del editor</a>
           </li>
           <li class="nav-item">
@@ -33,7 +33,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Contacto</a>
-          </li>
+          </li-->
         </ul>
       </div>
     </div>
@@ -60,7 +60,7 @@
             <li class="add" @click="$emit('add-item', item)">+</li>
           </ul>
 
-          <label class="btn btn-custom btn-secondary" v-show="isRoot && !item.children" for="file-selector">Examinar</label>
+          <label class="btn btn-custom btn-secondary" v-show="isRoot && !item.children" for="file-selector">Cargar</label>
           <input type="file" id="file-selector" accept=".json" @change="loadData">
           <label class="btn btn-custom btn-primary" v-show="isRoot && item.children" v-on:click="$emit('get-data', item)">Descargar</label>
         </li>
