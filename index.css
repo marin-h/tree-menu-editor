@@ -34,3 +34,12 @@ textarea {
   border-width: 0px;
   background: #f8f9fa;
 }
+
+.btn-custom {
+  width: unset;
+  margin-top: 0.5rem;
+}
+
+#file-selector, #file-export {
+  display: none;
+}

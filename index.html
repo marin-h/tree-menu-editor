@@ -59,11 +59,20 @@
             ></tree-item>
             <li class="add" @click="$emit('add-item', item)">+</li>
           </ul>
-          <button v-show="isRoot" v-on:click="$emit('get-data', item)">Descargar</button>
-          <input type="file" id="file-selector" accept=".json" v-show="isRoot && !item.children" @change="loadData">
+
+          <label class="btn btn-custom btn-secondary" v-show="isRoot && !item.children" for="file-selector">Examinar</label>
+          <input type="file" id="file-selector" accept=".json" @change="loadData">
+          <label class="btn btn-custom btn-primary" v-show="isRoot && item.children" v-on:click="$emit('get-data', item)">Descargar</label>
         </li>
       </script>
-    <p>(You can double click on an item to turn it into a folder.)</p>
+    <h1>¡Bienvenido/a!</h1>
+
+    <p>
+      Para agregar opciones anidadas: doble click en el "[+]"
+      <br>Para colapsar o desplegar: click en el "[-]" o "[+]"
+      <br>Para cargar un archivo de configuración inicial: click en el botón "Cargar"
+      <br>Para descargar un archivo con la configuración nueva: click en el botón "Descargar"
+    </p>
 
     <!-- the demo root element -->
     <ul id="demo">
@@ -161,6 +170,13 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
+  <script>
+    window.addEventListener("beforeunload", function (e) {
+      var confirmationMessage = "¿Confirma que desea salir?";
+      (e || window.event).returnValue = confirmationMessage;
+      return confirmationMessage;
+    });
+  </script>
 </body>
 
 </html>
