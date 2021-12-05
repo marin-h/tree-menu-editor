@@ -3,7 +3,7 @@
 set -e
 
 # build
-npm run build
+npm run prod-build
 
 # navigate into the build output directory
 cd dist
