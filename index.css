@@ -21,3 +21,16 @@ ul {
   line-height: 1.5em;
   list-style-type: dot;
 }
+
+input {
+  width: 92%;
+  border-width: 0px;
+  background: #f8f9fa;
+  margin-bottom: 0.4em;
+}
+
+textarea {
+  width: 100%;
+  border-width: 0px;
+  background: #f8f9fa;
+}

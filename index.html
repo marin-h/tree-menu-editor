@@ -43,7 +43,7 @@
     <script type="text/x-template" id="item-template">
         <li>
           <div :class="{bold: isFolder}">
-            <input placeholder="Escriba el nombre de este menu" type="text" v-bind:value="item.name">
+            <input placeholder="Escriba el nombre de este menu" type="text" v-bind:value="item.name" v-bind:readonly="isRoot">
             <span @click="toggle" @dblclick="makeFolder" v-model="item">[{{ isOpen ? '-' : '+' }}]</span>
             <br>
             <textarea placeholder="Escriba el texto de la respuesta">{{ item.response_text }}</textarea>
@@ -59,14 +59,15 @@
             ></tree-item>
             <li class="add" @click="$emit('add-item', item)">+</li>
           </ul>
+          <button v-show="isRoot" v-on:click="$emit('get-data', item)">Descargar</button>
+          <button v-show="isRoot && !item.children" v-on:click="$emit('set-data', item)">Cargar</button>
         </li>
       </script>
     <p>(You can double click on an item to turn it into a folder.)</p>
 
     <!-- the demo root element -->
     <ul id="demo">
-      <tree-item class="item" :item="treeData" @make-folder="makeFolder" @add-item="addItem">
-
+      <tree-item class="item" :item="treeData" @make-folder="makeFolder" @add-item="addItem" @get-data="getData" @set-data="setData">
       </tree-item>
     </ul>
 
@@ -238,6 +239,9 @@
           isFolder: function () {
             return this.item.children && this.item.children.length;
           },
+          isRoot: function () {
+            return this.item.name === 'start'
+          }
         },
         methods: {
           toggle: function () {
@@ -250,7 +254,7 @@
               this.$emit("make-folder", this.item);
               this.isOpen = true;
             }
-          },
+          }
         },
       });
 
@@ -258,7 +262,9 @@
       var demo = new Vue({
         el: "#demo",
         data: {
-          treeData: treeData,
+          treeData: {
+            name: 'start'
+          },
         },
         methods: {
           makeFolder: function (item) {
@@ -271,6 +277,19 @@
               text: "",
             });
           },
+          getData: function (item) {
+            const $el = document.createElement('a');
+            $el.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(item)));
+            $el.setAttribute('download', 'app_config.json');
+            $el.style.display = 'none';
+            document.body.appendChild($el);
+            $el.click();
+            document.body.removeChild($el);
+          },
+          setData: function (item) {
+            Vue.set(item, "children", treeData.children);
+            Vue.set(item, "response_text", treeData.response_text);
+          }
         },
       });
     </script>
