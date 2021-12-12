@@ -43,10 +43,10 @@
     <script type="text/x-template" id="item-template">
         <li>
           <div :class="{bold: isFolder}">
-            <input placeholder="Escriba el nombre de este menu" type="text" v-bind:value="item.name" v-bind:readonly="isRoot">
+            <input placeholder="Escriba el nombre de este menu" type="text" v-model="item.name" v-bind:readonly="isRoot">
             <span @click="toggle" @dblclick="makeFolder" v-model="item">[{{ isOpen ? '-' : '+' }}]</span>
             <br>
-            <textarea placeholder="Escriba el texto de la respuesta">{{ item.text }}</textarea>
+            <textarea v-model="item.text" placeholder="Escriba el texto de la respuesta"></textarea>
           </div>
           <ul v-show="isOpen" v-if="isFolder">
             <tree-item
