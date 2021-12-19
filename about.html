@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <!-- index.css -->
+    <link rel="stylesheet" href="./index.css">
+    <title>LetrasUBA_Bot - Edición</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">LetrasUBA_Bot<span class="d-none d-md-inline"> - </span><br
+                class="d-md-none" />Editor de configuración</a>
+                <a class="navbar-brand" href="about.html">Cómo usar el editor<span class="d-none d-md-inline"> </span><br
+                  class="d-md-none" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!--li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">Acerca del editor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cómo utilizar el editor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contacto</a>
+          </li-->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container px-5">
+
+        <h1>Editá el contenido de LetrasBot</h1>
+
+        <ol>
+            <li value="1">Descargá el último archivo de configuración en la carpeta de almacenamiento.</li>
+            <li value="2">Ingresá nuevamente al editor, hacé click en el botón "cargar" y adjuntá el archivo con la nueva configuración.</li>
+            <li value="3">Usá el editor para modificar las opciones de LetrasBot. Podés agregar nuevas opciones o modificar el texto de las ya existentes.</li>
+            <li value="4">Hacé click en el botón "Descargar" para obtener el archivo con la nueva configuración.</li>
+            <li value="5">En Telegram, ingresá a la conversación con LetrasBot. Enviale un mensaje con el archivo de la nueva configuración y el comando /cargar.</li>
+            <li value="6">Esperá el mensaje de configuración autorizada. El archivo de la nueva configuración se guardará automáticamente en la carpeta de almacenamiento.</li>
+        </ol>
+    </div>
+    <div id="app"></div>
+    <!-- App js -->
+    <script type="module" src="/src/main.js"></script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
