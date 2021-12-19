@@ -19,23 +19,15 @@
     <div class="container">
       <a class="navbar-brand" href="#">LetrasUBA_Bot<span class="d-none d-md-inline"> - </span><br
           class="d-md-none" />Editor de configuración</a>
-          <a class="navbar-brand" href="about.html">Cómo usar el editor<span class="d-none d-md-inline"> </span><br
-            class="d-md-none" /></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <!--li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Acerca del editor</a>
-          </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Cómo utilizar el editor</a>
+            <a class="nav-link" href="about.html">Guía de configuracion</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contacto</a>
-          </li-->
         </ul>
       </div>
     </div>
@@ -47,6 +39,7 @@
           <div :class="{bold: isFolder}">
             <input placeholder="Escriba el nombre de este menu" type="text" v-model="item.name" v-bind:readonly="isRoot">
             <span @click="toggle" @dblclick="makeFolder" v-model="item">[{{ isOpen ? '-' : '+' }}]</span>
+            <span @click="removeItem" v-model="item">{{ isRoot ? '' : '🗑'}}</span>
             <br>
             <textarea v-model="item.text" placeholder="Escriba el texto de la respuesta"></textarea>
           </div>
@@ -58,6 +51,8 @@
               :item="child"
               @make-folder="$emit('make-folder', $event)"
               @add-item="$emit('add-item', $event)"
+              @remove-child="removeChild"
+              @delete="$emit('remove-child', $event, item.children)"
             ></tree-item>
             <li class="add" @click="$emit('add-item', item)">+</li>
           </ul>
@@ -78,8 +73,8 @@
 
     <!-- the demo root element -->
     <ul id="demo">
-      <tree-item class="item" :item="treeData" @make-folder="makeFolder" @add-item="addItem" @get-data="getData"
-        @set-data="setData">
+      <tree-item class="item" :item="treeData" @make-folder="makeFolder" @add-item="addItem" @remove-child="removeChild"
+        @get-data="getData" @set-data="setData">
       </tree-item>
     </ul>
 
@@ -115,6 +110,13 @@
               this.isOpen = true;
             }
           },
+          removeItem: function () {
+            console.log('removeItem', JSON.stringify(this.item))
+            this.$emit("delete", this.item);
+          },
+          removeChild: function (item, children) {
+            children.splice(children.indexOf(item), 1);
+          },
           loadData: function (event) {
             const reader = new FileReader();
             reader.onload = function (evt) {
@@ -145,6 +147,9 @@
               name: "",
               text: "",
             });
+          },
+          removeChild: function (item, children) {
+            children.splice(children.indexOf(item), 1);
           },
           getData: function (item) {
             const $el = document.createElement('a');

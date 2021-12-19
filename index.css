@@ -43,3 +43,7 @@ textarea {
 #file-selector, #file-export {
   display: none;
 }
+
+.navbar {
+  margin-bottom: 1rem;
+}
