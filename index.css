@@ -1,0 +1,53 @@
+body {
+  font-family: monospace;
+  color: #444;
+}
+
+a:hover {
+  color: #000000;
+  font-weight: bold;
+}
+
+.item {
+  cursor: pointer;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+ul {
+  padding-left: 1em;
+  line-height: 1.5em;
+  list-style-type: dot;
+}
+
+input {
+  width: 92%;
+  border-width: 0px;
+  background: #f8f9fa;
+  margin-bottom: 0.4em;
+}
+
+textarea {
+  width: 100%;
+  border-width: 0px;
+  background: #f8f9fa;
+}
+
+.btn-custom {
+  width: unset;
+  margin-top: 0.5rem;
+}
+
+#file-selector, #file-export {
+  display: none;
+}
+
+.navbar {
+  margin-bottom: 1rem;
+}
+
+.indicacion {
+  margin-top: 1em;
+}
