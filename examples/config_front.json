@@ -1,6 +1,6 @@
 {
     "name": "start",
-    "text": "¡Hola! Soy LetrasUBA_bot, el bot del Departamento de Letras de la UBA. ¿En qué puedo ayudarte? \nIngresá uno de las siguientes opciones:",
+    "text": "¡Hola! Soy UNLAMate_Bot, el bot del Departamento de Letras de la UBA. ¿En qué puedo ayudarte? \nIngresá uno de las siguientes opciones:",
     "children": [
         {
             "name": "Inscripciones",
